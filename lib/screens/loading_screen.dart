@@ -56,7 +56,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SpinKitDoubleBounce(
+        child: SpinKitChasingDots(
           color: Colors.white,
           size: 100.0,
         ),
@@ -66,7 +66,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
 }
 
 /// Determine the current position of the device.
-///
 /// When the location services are not enabled or permissions
 /// are denied the `Future` will return an error.
 Future<Position> _determinePosition() async {

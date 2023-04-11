@@ -13,10 +13,10 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   WeatherModel weather = WeatherModel();
-  late int temperature;
-  late String weatherIcon;
-  late String cityName;
-  late String weatherMessage;
+  int? temperature;
+  String? weatherIcon;
+  String? cityName;
+  String? weatherMessage;
 
   @override
   void initState() {
@@ -27,6 +27,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void updateUI(dynamic weatherData) {
     setState(() {
+      // 이건 null safety 처리를 해줘서 안해도 될 것 같다.
       if (weatherData == null) {
         temperature = 0;
         weatherIcon = 'Error';
@@ -38,7 +39,7 @@ class _LocationScreenState extends State<LocationScreen> {
       temperature = temp.toInt();
       var condition = weatherData['weather'][0]['id'];
       weatherIcon = weather.getWeatherIcon(condition);
-      weatherMessage = weather.getMessage(temperature);
+      weatherMessage = weather.getMessage(temperature!);
       cityName = weatherData['name'];
     });
   }
@@ -84,6 +85,7 @@ class _LocationScreenState extends State<LocationScreen> {
                           },
                         ),
                       );
+                      print(typedName);
                       if (typedName != null) {
                         var weatherData =
                             await weather.getCityWeather(typedName);
@@ -106,7 +108,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       style: kTempTextStyle,
                     ),
                     Text(
-                      weatherIcon,
+                      weatherIcon!,
                       style: kConditionTextStyle,
                     ),
                   ],

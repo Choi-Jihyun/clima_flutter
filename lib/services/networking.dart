@@ -1,12 +1,13 @@
+//networking.dart
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class NetworkHelper {
-  NetworkHelper(String url) : _uri = Uri.parse(url);
-  final Uri _uri;
+  NetworkHelper(String url) : uri = Uri.parse(url);
+  final Uri uri;
 
-  Future getData() async {
-    http.Response response = await http.get(_uri);
+  Future<dynamic> getData() async {
+    http.Response response = await http.get(uri);
 
     if (response.statusCode == 200) {
       String data = response.body;
